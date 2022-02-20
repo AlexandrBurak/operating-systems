@@ -1,0 +1,4 @@
+Report about file "file.bin":
+EmpNum !! EmpName !! EmpHours !! EmpPayment
+1  !!  Lex  !!  5  !!  10
+2  !!  Sanya  !!  10  !!  20
