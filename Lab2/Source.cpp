@@ -46,7 +46,7 @@ DWORD WINAPI polynom(LPVOID par)
 	}
 	res += data->odds[data->deg];
 	Sleep(15);
-	cout << "x = " << data->x << " || " << "y = " << res << endl;
+	cout << "p(" << data->x << ") = " << res << endl;
 	data->res = res;
 	return 0;
 }
@@ -84,7 +84,7 @@ int main() {
 	PolynomThreadHandls[1] = CreateThread(NULL, 0, polynom, (void*)&denum, 0, &PolynomThreadID[1]);
 	WaitForMultipleObjects(polynom_count, PolynomThreadHandls, TRUE, INFINITE);
 
-	cout << "x = " << x << " || " << "num / denum = " << num.res / denum.res;
+	cout << "f(" << x << ") = " << num.res / denum.res;
 
 	return 0;
 }
