@@ -6,24 +6,6 @@
 #include <windows.h>
 using namespace std;
 
-/*
-DWORD WINAPI producer(LPVOID par)
-{
-	WaitForSingleObject(start, INFINITE);
-
-	DataForProducer *data = (DataForProducer*)par;
-
-
-	for (int i = 0; i < data->count; i++)
-	{
-		data->queue->insert(data->number * 100 + i);
-		cout << "Thread " << data->number << " put in queue number :\"" << data->number * 100 + i << "\"\n";
-		Sleep(500 * 2);
-	}
-
-	return 0;
-}
-*/
 
 struct DataForPolynom {
 	int deg;
