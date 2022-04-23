@@ -4,8 +4,8 @@
 #include <ctime>
 #include <cmath>   
 #include <windows.h>
-using namespace std;
 
+using namespace std;
 
 struct DataForPolynom {
 	int deg;
@@ -14,10 +14,8 @@ struct DataForPolynom {
 	double res;
 };
 
-
 DWORD WINAPI polynom(LPVOID par)
 {
-
 	DataForPolynom* data = (DataForPolynom*)par;
 
 	double res = 0;
@@ -32,7 +30,6 @@ DWORD WINAPI polynom(LPVOID par)
 	data->res = res;
 	return 0;
 }
-
 
 void get_data_for_th(DataForPolynom& dt) {
 	cout << "Vvedite stepen' polynoma: ";
