@@ -13,17 +13,14 @@ int messagesNumber;
 struct Message {
 	char name[20];
 	char text[20];
-
 	Message() {
 		strcpy(name, "111");
 		strcpy(text, "111");
 	}
-
 	Message(char* name1, char* text1) {
 		strcpy(name, name1);
 		strcpy(text, text1);
 	}
-
 	Message(const char* name1, const char* text1) {
 		strcpy(name, name1);
 		strcpy(text, text1);
@@ -47,32 +44,25 @@ void read(char* filename) {
 	WaitForSingleObject(FULL, INFINITE);
 	WaitForSingleObject(MUTEX, INFINITE);
 	cout << "Message read pos: " << messageReadPos << endl;
-
 	fstream f(filename, ios::binary | ios::in | ios::out);
 	if (!f.is_open()) {
 		cout << "error\n";
 		return;
 	}
-
 	Message* m = new Message();
 	char writeIter[10];
 	int pos = sizeof(writeIter) + sizeof(Message) * messageReadPos;
-
 	f.seekg(pos, ios::beg);
 	f.read((char*)m, sizeof(Message));
 	cout << "Message author: " << m->name << ", text: " << m->text << endl;
-
 	f.seekp(pos, ios::beg);
 	m = new Message("deleted", "deleted");
 	f.write((char*)m, sizeof(Message));
-
 	messageReadPos++;
 	if (messageReadPos == messagesNumber) {
 		messageReadPos = 0;
 	}
-
 	f.close();
-
 	ReleaseMutex(MUTEX);
 	ReleaseSemaphore(EMPTY, 1, NULL);
 }
@@ -81,22 +71,17 @@ void main() {
 	cout << "Enter file name:\n";
 	char filename[20];
 	cin >> filename;
-
 	cout << "Enter messages number:\n";
 	cin >> messagesNumber;
 	createFile(filename, messagesNumber);
-
 	cout << "Enter Sender process count: \n";
 	int senderProcessCount;
 	cin >> senderProcessCount;
-	
 	FULL = CreateSemaphore(NULL, 0, messagesNumber, (LPCWSTR)"Full");
 	EMPTY = CreateSemaphore(NULL, messagesNumber, messagesNumber, (LPCWSTR)"Empty");
 	MUTEX = CreateMutex(NULL, FALSE, (LPCWSTR)"Mutex");
-
 	STARTUPINFO* si = new STARTUPINFO[senderProcessCount];
 	PROCESS_INFORMATION* pi = new PROCESS_INFORMATION[senderProcessCount];
-
 	char data[110] = "Sender ";
 	strcat(data, filename);
 	strcat(data, " ");
@@ -116,14 +101,12 @@ void main() {
 			return;
 		}
 	}
-
 	system("cls");
 	bool doCycle = true;
 	while (doCycle) {
 		cout << "Enter:\n1) Read\n2) Exit\n";
 		int answer;
 		cin >> answer;
-
 		if (answer == 1) {
 			read(filename);
 		}
@@ -131,5 +114,4 @@ void main() {
 			doCycle = false;
 		}
 	}
-
 }
