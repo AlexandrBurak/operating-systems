@@ -1,3 +1,4 @@
+/*...*/
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -8,9 +9,9 @@ using std::cin;
 using std::endl;
 using std::thread;
 
-
 void polynom(DataForPolynom& data)
 {
+
 	double res = 0;
 	for (int i = 0; i < data.deg; i++)
 	{
@@ -33,7 +34,7 @@ void get_data_for_th(DataForPolynom& dt) {
 		dt.odds.push_back(var);
 	}
 	cout << endl;
-
+	
 }
 
 int main() {
